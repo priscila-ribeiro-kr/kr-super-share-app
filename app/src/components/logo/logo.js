@@ -1,7 +1,7 @@
 import "./logo.css";
 
 function Logo() {
-  return <div className="Logo">Sorteio Amigo Secreto</div>;
+  return <div className="Logo">SuperShare</div>;
 }
 
 export { Logo };

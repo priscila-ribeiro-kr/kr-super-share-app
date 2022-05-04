@@ -5,18 +5,20 @@
 
 .Input label {
   font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 15px;
   line-height: 27px;
-  color: #000000;
 }
 
 .Input input {
-  background: #ccab98;
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-color: transparent;
-  border-width: 0px;
-  padding: 7px 10px;
-  border-radius: 20px;
-  font-size: 18px;
+  background: #fff;
+    border: 1px solid #1d1e1f;
+    border-radius: 0.25rem;
+    color: #1d1e1f;
+    display: block;
+    font-size: 1rem;
+    height: 2.5rem;
+    max-width: 24.25rem;
+    padding: 0 1rem;
+    width: 80%;
 }

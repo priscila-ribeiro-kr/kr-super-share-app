@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/button/button";
 import { Input } from "../../components/input/input";
-import { Logo } from "../../components/logo/logo";
 import { HSpacer } from "../../components/spacer/spacer";
 import { Link } from "../../components/text/link/link";
 import { Title } from "../../components/text/title/title";
@@ -25,7 +24,7 @@ function Login() {
       AuthService.login(Strings.removeNonNumericCharacters(phone), password)
     );
     if (!success) {
-      setLoginError("Login inválido!");
+      setLoginError("Wrong password.");
     } else {
       navigate(AppRoutes.MyGroups);
     }
@@ -43,8 +42,7 @@ function Login() {
 
   return (
     <div className="Login">
-      <HSpacer height="62px" />
-      <Logo />
+
       <HSpacer height="14px" />
       <Title>Login</Title>
       <HSpacer height="16px" />
@@ -52,7 +50,7 @@ function Login() {
         <Input
           value={phone}
           onChange={handlePhoneChange}
-          label="Telefone"
+          label="Phone"
           id="username"
           type="text"
         />
@@ -60,16 +58,16 @@ function Login() {
         <Input
           value={password}
           onChange={handlePasswordChange}
-          label="Senha"
+          label="Password"
           id="password"
           type="password"
           error={loginError}
         />
         <HSpacer height="8px" />
-        <Button onClick={handleLogin}>Entrar</Button>
+        <Button onClick={handleLogin}>Login</Button>
       </form>
       <HSpacer height="16px" />
-      <Link href={AppRoutes.Register}>Não tem conta? Se cadastre aqui.</Link>
+      <Link href={AppRoutes.Register}>No account? Sign up.</Link>
     </div>
   );
 }

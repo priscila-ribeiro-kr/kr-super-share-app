@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/button/button";
 import { Input } from "../../components/input/input";
-import { Logo } from "../../components/logo/logo";
 import { HSpacer } from "../../components/spacer/spacer";
 import { Title } from "../../components/text/title/title";
 import { AppRoutes } from "../../constants/routes.constants";
@@ -77,10 +76,7 @@ function Register() {
 
   return (
     <div className="Register">
-      <HSpacer height="48px" />
-      <Logo />
-      <HSpacer height="14px" />
-      <Title>Cadastro</Title>
+      <Title>Register</Title>
       <HSpacer height="16px" />
       <form>
         <Input
@@ -96,7 +92,7 @@ function Register() {
         <Input
           value={phone}
           onChange={handlePhoneChange}
-          label="Telefone"
+          label="Phone"
           id="username"
           type="text"
           error={errors.phone}
@@ -106,7 +102,7 @@ function Register() {
         <Input
           value={password}
           onChange={handlePasswordChange}
-          label="Senha (Mínimo 8 dígitos)"
+          label="Password (min. 8 characters)"
           id="password"
           type="password"
           error={errors.password}
@@ -116,14 +112,14 @@ function Register() {
         <Input
           value={confirmPassword}
           onChange={handleConfirmPasswordChange}
-          label="Repetir senha"
+          label="Repeat password"
           id="confirm-password"
           type="password"
           error={errors.confirmPassword}
           required
         />
         <HSpacer height="16px" />
-        <Button onClick={handleRegister}>Cadastrar</Button>
+        <Button onClick={handleRegister}>Register</Button>
         <Error center>{registerError}</Error>
         <HSpacer height="16px" />
       </form>

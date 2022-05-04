@@ -1,0 +1,294 @@
+/* Mobile */
+.appName {
+  color: #084999;
+}
+
+.KrogerHeaderContainer {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20), 0 3px 5px 0 rgba(0, 0, 0, 0.10);
+  width: 100%;
+}
+
+.KrogerHeader {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgb(222, 226, 230);
+  }
+  
+  .KrogerHeader-RowBreak {
+    flex-basis: 100%;
+    order: 7;
+  }
+  
+  .KrogerHeader-Item {
+    padding: 20px;
+  }
+  
+  .KrogerHeader-Welcome #LinkListContainer-WelcomeDesktop {
+    display: none;
+  }
+  
+  .KrogerHeader-Item.KrogerHeader-ModalitySelector {
+    border-top: 1px solid #eff0f1;
+    margin: 0;
+  }
+  
+  .KrogerHeader-Logo {
+    flex: none;
+    order: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .KrogerHeader-Logo--inner {
+    max-width: 80px;
+
+  }
+  
+  .KrogerHeader-StoreLocator {
+    order: 4;
+  }
+  
+  .KrogerHeader-Search {
+    flex: 1;
+    order: 3;
+    margin-left: 0;
+  
+    &.Search-Dropdown {
+      position: relative;
+      margin-right: 0;
+      background: #fff;
+      height: 100%;
+    }
+  }
+  
+  .KrogerHeader-Welcome {
+    order: 5;
+    margin-left: 8px;
+  }
+  
+  .KrogerHeader-Basket {
+    order: 6;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .KrogerHeader-Basket .CartTotal {
+    display: none;
+  }
+  
+  .KrogerRightQuickLinks,
+  .StoreHeader-Icon-Text {
+    display: none;
+  }
+  
+  .KrogerHeader-ModalityRightQuickLinks {
+    display: flex;
+  
+    .KrogerHeader-StoreLocator {
+      display: block;
+      padding-left: 20px;
+    }
+  }
+  
+  .CurrentModality {
+    float: right;
+  }
+  
+  .CurrentModality button {
+    background: none;
+    border: none;
+  }
+  
+  .Welcome-button--mobile {
+    border: 0;
+    background: none;
+    padding: 0;
+  }
+  
+  .Welcome-button--desktop {
+    border: 0;
+    background: none;
+  }
+  
+  .Welcome-container--desktop {
+    display: none;
+  }
+  
+  .WelcomeMenu-signOut-button {
+    width: 8.875rem;
+  }
+  
+  .WelcomeMenu-signIn-button {
+    width: 8.875rem;
+  }
+  
+  .WelcomeMenu-createAccount-button {
+    width: 8.875rem;
+  }
+  
+  .KrogerHeader-ModalitySelector {
+    order: 10;
+    flex-basis: 100%;
+  }
+  
+  .KrogerHeader-ModalitySelector-RightQuickLinks {
+    display: inline;
+  }
+  
+  .WelcomeMenu-dropdown-icon {
+    transition: transform 0.1s;
+  
+    /* max 0.15s */
+  }
+  
+  .WelcomeMenu-dropdown-icon--up {
+    transform: rotateX(180deg);
+  }
+
+  .Image {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+  
+  
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .KrogerRightQuickLinks {
+      display: flex;
+      flex: auto;
+    }
+  
+    .KrogerHeader-ModalitySelector {
+      display: flex;
+      overflow: hidden;
+      order: 4;
+      flex-basis: auto;
+    }
+  
+    .KrogerHeader-ModalitySelector-RightQuickLinks {
+      display: none;
+    }
+  
+    .KrogerHeader-ModalityRightQuickLinks {
+      display: flex;
+  
+      .KrogerHeader-StoreLocator,
+      .KrogerHeader-StoreSearchIcon {
+        flex: 1;
+        order: 0;
+        margin: auto 0;
+        font-size: 18px;
+        padding-left: 20px;
+        align-self: center;
+      }
+  
+      .KrogerHeader-StoreLocator {
+        display: block;
+      }
+  
+      .StoreLocator-Container,
+      .StoreSearchIcon-Container {
+        align-items: flex-start;
+      }
+  
+      .CurrentModality {
+        float: left;
+      }
+    }
+  
+    .KrogerHeader-RowBreak {
+      display: none;
+    }
+  
+    .KrogerHeaderContainer .DesktopLinkList .LinkList .DropdownOpen .LinkList {
+      white-space: normal;
+    }
+  
+    .KrogerHeader-Welcome #LinkListContainer-WelcomeDesktop {
+      display: block;
+    }
+  
+    .KrogerHeader {
+      align-items: center;
+      height: 88px;
+      flex-flow: nowrap;
+    }
+  
+    .KrogerHeader .DesktopLinkList .LinkList .LinkList-ListItem .ListItem-Link {
+      display: block;
+    }
+  
+    .KrogerHeader-Item {
+      margin: auto 0.5rem;
+    }
+  
+    .KrogerHeader-Logo {
+      margin: auto 1rem;
+      max-width: 150px;
+      min-width: 100px;
+    }
+  
+    .KrogerHeader-Logo--inner {
+      max-width: 150px;
+      height: 56px;
+    }
+  
+    .KrogerHeader-Search {
+      margin-left: 1rem;
+      min-width: 275px;
+    }
+  
+    .KrogerHeader-Welcome #LinkListContainer-welcomeDesktop {
+      display: block;
+    }
+  
+    .KrogerHeader-Welcome #WelcomeDesktop-welcome .ListItem-Button-Dropdown {
+      height: 52px;
+      padding: 0;
+    }
+  
+    .KrogerHeader-Welcome {
+      align-self: flex-end;
+      justify-self: right;
+      width: auto;
+    }
+  
+    .KrogerHeader-Basket {
+      order: 6;
+      margin: auto 1rem auto auto;
+    }
+  
+    .KrogerHeader-Basket .CartTotal {
+      display: block;
+    }
+  
+    .Welcome-button--mobile {
+      display: none;
+    }
+  
+    .Welcome-container--desktop {
+      display: block;
+    }
+  
+    .WelcomeMenu-signOut-button {
+      width: 100%;
+    }
+  
+    .WelcomeMenu-signIn-button {
+      width: 100%;
+    }
+  
+    .WelcomeMenu-createAccount-button {
+      width: 100%;
+    }
+  
+    .KrogerHeader-Item.KrogerHeader-ModalitySelector {
+      border-top: none;
+      margin: 8px;
+    }
+  }
+  

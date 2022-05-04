@@ -61,7 +61,7 @@ class AuthService {
     } catch (e) {
       const status = Objects.safeGet(e.response, (response) => response.status);
       if (status === HttpStatus.CONFLICT) {
-        return "O usuário já existe";
+        return "User already exits";
       } else if (status === HttpStatus.BAD_GATEWAY) {
         return "Erro na validação da entrada";
       } else {
@@ -73,16 +73,16 @@ class AuthService {
   static isValidUser(name, phone, password, confirmPassword) {
     const errors = {};
     if (Objects.isEmpty(name)) {
-      errors.name = "Nome não pode ser vazio";
+      errors.name = "Field name can't be empty.";
     }
     if (Objects.isEmpty(phone) || Length.isNotEqual(phone, 11)) {
-      errors.phone = "Número deve ter 11 dígitos";
+      errors.phone = "Phone number must have 11 characters.";
     }
     if (Objects.isEmpty(password) || Length.isSmaller(password, 8)) {
-      errors.password = "Senha deve ter no mínimo 8 caracteres";
+      errors.password = "Password must have minimum 8 characters.";
     }
     if (Objects.isNotEqual(password, confirmPassword)) {
-      errors.confirmPassword = "Senha e confirmação não são iguais";
+      errors.confirmPassword = "Password and its confirmation don't match.";
     }
 
     return errors;

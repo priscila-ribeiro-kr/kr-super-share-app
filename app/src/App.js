@@ -10,70 +10,74 @@ import { PublicRoute } from "./components/route/public.route";
 import { AppRoutes } from "./constants/routes.constants";
 import { Logout } from "./views/logout/logout";
 import "./App.css";
+import { Header } from "./components/header/header";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path={AppRoutes.EditGroup}
-            element={
-              <UserRoute>
-                <EditGroup />
-              </UserRoute>
-            }
-          ></Route>
-          <Route
-            path={AppRoutes.CreateGroup}
-            element={
-              <UserRoute>
-                <CreateGroup />
-              </UserRoute>
-            }
-          ></Route>
-          <Route
-            path={AppRoutes.MyGroups}
-            element={
-              <UserRoute>
-                <MyGroups />
-              </UserRoute>
-            }
-          ></Route>
-          <Route
-            path={AppRoutes.ViewGroup}
-            element={
-              <UserRoute>
-                <ViewGroup />
-              </UserRoute>
-            }
-          ></Route>
-          <Route
-            path={AppRoutes.Register}
-            element={
-              <PublicRoute>
-                <Register />
-              </PublicRoute>
-            }
-          ></Route>
-          <Route
-            path={AppRoutes.Logout}
-            element={
-              <PublicRoute>
-                <Logout />
-              </PublicRoute>
-            }
-          ></Route>
-          <Route
-            path={AppRoutes.Login}
-            element={
-              <PublicRoute>
-                <Login />
-              </PublicRoute>
-            }
-          ></Route>
-        </Routes>
-      </BrowserRouter>
+      <Header></Header>
+      <div className="MainContainer">
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path={AppRoutes.EditGroup}
+              element={
+                <UserRoute>
+                  <EditGroup />
+                </UserRoute>
+              }
+            ></Route>
+            <Route
+              path={AppRoutes.CreateGroup}
+              element={
+                <UserRoute>
+                  <CreateGroup />
+                </UserRoute>
+              }
+            ></Route>
+            <Route
+              path={AppRoutes.MyGroups}
+              element={
+                <UserRoute>
+                  <MyGroups />
+                </UserRoute>
+              }
+            ></Route>
+            <Route
+              path={AppRoutes.ViewGroup}
+              element={
+                <UserRoute>
+                  <ViewGroup />
+                </UserRoute>
+              }
+            ></Route>
+            <Route
+              path={AppRoutes.Register}
+              element={
+                <PublicRoute>
+                  <Register />
+                </PublicRoute>
+              }
+            ></Route>
+            <Route
+              path={AppRoutes.Logout}
+              element={
+                <PublicRoute>
+                  <Logout />
+                </PublicRoute>
+              }
+            ></Route>
+            <Route
+              path={AppRoutes.Login}
+              element={
+                <PublicRoute>
+                  <Login />
+                </PublicRoute>
+              }
+            ></Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
     </div>
   );
 }

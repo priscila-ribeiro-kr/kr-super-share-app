@@ -32,10 +32,7 @@ class GroupService {
 
   static async update(group) {
     try {
-      if (
-        Objects.isEmpty(group.members) ||
-        Length.isSmaller(group.members, 3)
-      ) {
+      if (Objects.isEmpty(group.members)) {
         return "Necessário no mínimo três participantes";
       }
       await axios.put(API.Group.Update, group);
@@ -98,7 +95,7 @@ class GroupService {
   static isValidGroup(group) {
     const errors = {};
 
-    if (Objects.isEmpty(group.members) || Length.isSmaller(group.members, 3)) {
+    if (Objects.isEmpty(group.members)) {
       errors.members = "Necessário no mínimo três participantes";
     }
 
@@ -108,32 +105,6 @@ class GroupService {
     if (Objects.isEmpty(group.date)) {
       errors.date = "Necessário definir uma data";
     }
-    if (Objects.isEmpty(group.minValue)) {
-      errors.minValue = "Necessário definir um valor mínimo";
-    }
-    if (Objects.isEmpty(group.maxValue)) {
-      errors.maxValue = "Necessário definir um valor máximo";
-    }
-    if (group.maxValue <= 0) {
-      errors.maxValue = "Valor máximo deve ser maior que zero";
-    }
-
-    if (isNaN(group.minValue)) {
-      errors.minValue = "Valor mínimo deve ser um número válido";
-    }
-
-    if (isNaN(group.maxValue)) {
-      errors.maxValue = "Valor mínimo deve ser um número válido";
-    }
-
-    if (
-      !isNaN(group.minValue) &&
-      !isNaN(group.maxValue) &&
-      group.maxValue < group.minValue
-    ) {
-      errors.maxValue = "Valor máximo deve ser maior ou igual ao mínimo";
-    }
-
     return errors;
   }
 }

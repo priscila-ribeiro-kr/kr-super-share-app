@@ -118,7 +118,7 @@ function EditMembers(props) {
         {group.members.map((member, index) => (
           <ListItem key={index} id={member.phone} onClick={handleRemoveMember}>
             <Text>
-              {member.phone === user.phone ? "[Você]" : ""} {member.name} (
+              {member.phone === user.phone ? "[You]" : ""} {member.name} (
               {member.phone})
             </Text>
           </ListItem>
@@ -126,9 +126,9 @@ function EditMembers(props) {
       </div>
       <Error center>{error}</Error>
       <HSpacer height="16px" />
-      <Button onClick={handleCancel}>Cancelar</Button>
+      <Button onClick={handleCancel}>Cancel</Button>
       <HSpacer height="8px" />
-      <Button onClick={handleSave}>Salvar Alterações</Button>
+      <Button onClick={handleSave}>Save</Button>
       <HSpacer height="16px" />
     </div>
   );

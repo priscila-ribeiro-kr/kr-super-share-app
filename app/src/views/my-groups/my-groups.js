@@ -46,7 +46,7 @@ function MyGroups() {
   return (
     <div className="MyGroups">
       <HSpacer height="16px" />
-      <Title>Seus grupos</Title>
+      <Title>Your Lists</Title>
       {groups &&
         groups.map((group, index) => (
           <div key={index}>
@@ -63,9 +63,9 @@ function MyGroups() {
             <HSpacer height="16px" />
           </div>
         ))}
-      <Button onClick={handleOnCreateGroup}>Criar grupo</Button>
+      <Button onClick={handleOnCreateGroup}>Create List</Button>
       <HSpacer height="8px" />
-      <Button onClick={handleLogout}>Sair</Button>
+      <Button onClick={handleLogout}>Log Out</Button>
       <HSpacer height="16px" />
     </div>
   );

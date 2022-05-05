@@ -124,9 +124,9 @@ function EditInfo(props) {
         required
       />
       <HSpacer height="16px" />
-      <Button onClick={handleCancel}>Cancelar</Button>
+      <Button onClick={handleCancel}>Cancel</Button>
       <HSpacer height="8px" />
-      <Button onClick={handleSave}>Salvar Alterações</Button>
+      <Button onClick={handleSave}>Save</Button>
       <Error center>{error}</Error>
       <HSpacer height="16px" />
     </div>

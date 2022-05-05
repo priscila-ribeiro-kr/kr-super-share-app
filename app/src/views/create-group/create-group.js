@@ -82,6 +82,7 @@ function CreateGroup() {
     e.preventDefault();
     const group = createGroupFromState();
     const errors = GroupService.isValidGroup(group);
+    console.log(errors);
     if (Objects.isEmpty(errors)) {
       const error = await executeWithLoading(GroupService.create(group));
       if (Objects.isNotEmpty(error) && Objects.isString(error)) {
@@ -165,15 +166,15 @@ function CreateGroup() {
     <div className="CreateGroup">
       <HSpacer height="16px" />
       <div className="CreateGroup_Title">
-        <Title>Criar grupo</Title>
+        <Title>Create List</Title>
       </div>
       <form>
-        <Text>Informações gerais</Text>
+        <Text>General Info</Text>
         <Card>
           <Input
             value={groupName}
             onChange={handleGroupNameChange}
-            label="Nome do grupo"
+            label="List Name"
             id="group-name"
             type="text"
             error={errors.name}
@@ -183,64 +184,40 @@ function CreateGroup() {
           <Input
             value={date}
             onChange={handleDateChange}
-            label="Data do amigo secreto"
+            label="List Date"
             id="date"
             type="date"
             error={errors.date}
             required
           />
-          <HSpacer height="16px" />
-          <Input
-            value={minValue}
-            onChange={handleMinValueChange}
-            label="Valor mínimo (Ex.: 5.00)"
-            id="min-value"
-            type="number"
-            min="10"
-            error={errors.minValue}
-            required
-          />
-          <HSpacer height="16px" />
-          <Input
-            value={maxValue}
-            onChange={handleMaxValueChange}
-            label="Valor máximo (Ex.: 25.00)"
-            id="max-value"
-            type="number"
-            error={errors.maxValue}
-            required
-          />
-          <HSpacer height="8px" />
         </Card>
         <HSpacer height="4px" />
-        <Text>Participantes (Mínimo 3)</Text>
+        <Text>Members</Text>
         <Card>
           <Input
             value={memberName}
             onChange={handleMemberNameChange}
-            label="Nome do participante"
+            label="Member name"
             id="member-name"
             type="text"
             error={errors.memberName}
-            required
           />
           <HSpacer height="16px" />
           <Input
             value={memberPhone}
             onChange={handleMemberPhoneChange}
-            label="Telefone do participante"
+            label="Member phone"
             id="member-phone"
             type="tel"
             error={errors.memberPhone}
-            required
           />
           <HSpacer height="16px" />
-          <Button onClick={handleAddMember}>Adicionar participante</Button>
+          <Button onClick={handleAddMember}>Add member</Button>
           <Error center>{errors.members}</Error>
           <HSpacer height="16px" />
           <Bar />
           <HSpacer height="4px" />
-          <Subtitle>Lista de participantes</Subtitle>
+          <Subtitle>Members List</Subtitle>
           {members.map((member, index) => (
             <ListItem
               key={index}
@@ -248,7 +225,7 @@ function CreateGroup() {
               onClick={handleRemoveMember}
             >
               <Text>
-                {member.phone === user.phone ? "[Você]" : ""} {member.name} (
+                {member.phone === user.phone ? "[You]" : ""} {member.name} (
                 {member.phone})
               </Text>
             </ListItem>
@@ -257,11 +234,11 @@ function CreateGroup() {
         {members.some((m) => m.phone === user.phone) && (
           <>
             <HSpacer height="4px" />
-            <Text>Presentes</Text>
+            <Text>Items</Text>
             <Card>
               <TextArea
                 id="wishes"
-                label="Sua lista de desejos"
+                label="Wish list"
                 onChange={handleWishesChange}
                 cols="40"
                 rows="10"
@@ -272,14 +249,13 @@ function CreateGroup() {
           </>
         )}
         <HSpacer height="8px" />
-        <Button onClick={handleCancelGroup}>Cancelar grupo</Button>
+        <Button onClick={handleCancelGroup}>Cancel</Button>
         <HSpacer height="2px" />
-        <Button onClick={handleSave}>Salvar informações</Button>
+        <Button onClick={handleSave}>Save</Button>
         <HSpacer height="2px" />
-        <Button onClick={handleSort}>Sortear amigo secreto</Button>
         <Error center>{error}</Error>
         <Error center>
-          {Objects.isDeeplyNotEmpty(errors) && "Verifique os campos novamente"}
+          {Objects.isDeeplyNotEmpty(errors) && "Checking missing fields"}
         </Error>
         <HSpacer height="8px" />
       </form>

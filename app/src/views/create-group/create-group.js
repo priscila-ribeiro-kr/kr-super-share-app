@@ -169,8 +169,9 @@ function CreateGroup() {
         <Title>Create List</Title>
       </div>
       <form>
-        <Text>General Info</Text>
+        
         <Card>
+          <Text>General Info</Text>
           <Input
             value={groupName}
             onChange={handleGroupNameChange}
@@ -192,8 +193,25 @@ function CreateGroup() {
           />
         </Card>
         <HSpacer height="4px" />
-        <Text>Members</Text>
+        
         <Card>
+          <Text>Members</Text>
+          <Subtitle>Members List</Subtitle>
+          {members.map((member, index) => (
+            <ListItem
+              key={index}
+              id={member.phone}
+              onClick={handleRemoveMember}
+            >
+              <Text>
+                {member.phone === user.phone ? "[You]" : ""} {member.name} (
+                {member.phone})
+              </Text>
+            </ListItem>
+          ))}
+          <HSpacer height="4px" />
+          <Bar />
+          <HSpacer height="16px" />
           <Input
             value={memberName}
             onChange={handleMemberNameChange}
@@ -214,28 +232,15 @@ function CreateGroup() {
           <HSpacer height="16px" />
           <Button onClick={handleAddMember}>Add member</Button>
           <Error center>{errors.members}</Error>
-          <HSpacer height="16px" />
-          <Bar />
           <HSpacer height="4px" />
-          <Subtitle>Members List</Subtitle>
-          {members.map((member, index) => (
-            <ListItem
-              key={index}
-              id={member.phone}
-              onClick={handleRemoveMember}
-            >
-              <Text>
-                {member.phone === user.phone ? "[You]" : ""} {member.name} (
-                {member.phone})
-              </Text>
-            </ListItem>
-          ))}
+
         </Card>
         {members.some((m) => m.phone === user.phone) && (
           <>
             <HSpacer height="4px" />
-            <Text>Items</Text>
+            
             <Card>
+              <Text>Items</Text>
               <TextArea
                 id="wishes"
                 label="Wish list"

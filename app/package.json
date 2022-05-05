@@ -1,9 +1,12 @@
 {
-  "name": "sorteio-amigo-secreto-app",
+  "name": "kr-super-share-app",
   "version": "1.0.0",
   "private": true,
-  "description": "App do Sorteio Amigo Secreto",
+  "description": "Super Share - Collaborative Shopping List",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",

@@ -4,7 +4,7 @@ import "./kds-styles.css";
 function Header(props) {
   return (
     <div class="KrogerHeaderContainer">
-      <div class="KrogerHeader flex items-center">
+      <div class="KrogerHeader">
         <div class="KrogerHeader-Item KrogerHeader-Logo">
           <div class="dpr Header.AmpHocEsperanto">
             <div class="Page-header bg-default-50">

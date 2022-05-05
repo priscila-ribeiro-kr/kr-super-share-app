@@ -1,6 +1,7 @@
 /* Mobile */
 .appName {
   color: #084999;
+  text-align: right;
 }
 
 .KrogerHeaderContainer {
@@ -155,7 +156,7 @@
   }
   
   
-  /* Desktop */
+  /* Desktop
   @media (min-width: 1024px) {
     .KrogerRightQuickLinks {
       display: flex;
@@ -227,13 +228,10 @@
     }
   
     .KrogerHeader-Logo {
-      margin: auto 1rem;
-      max-width: 150px;
       min-width: 100px;
     }
   
     .KrogerHeader-Logo--inner {
-      max-width: 150px;
       height: 56px;
     }
   
@@ -291,4 +289,4 @@
       margin: 8px;
     }
   }
-  
+   */

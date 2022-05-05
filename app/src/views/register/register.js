@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/button/button";
 import { Input } from "../../components/input/input";
 import { HSpacer } from "../../components/spacer/spacer";
-import { Title } from "../../components/text/title/title";
 import { AppRoutes } from "../../constants/routes.constants";
 import { AuthService } from "../../services/auth.service";
 import { Objects } from "../../utils/object.utils";
@@ -76,8 +75,8 @@ function Register() {
 
   return (
     <div className="Register">
-      <Title>Register</Title>
       <HSpacer height="16px" />
+      <header class="column-heading-container text-center mb-16" aria-label="Create Your Account"><svg class="kds-Icon kds-Icon--display" focusable="false" fill="currentColor" width="1em" height="1em" viewBox="0 0 16 16" data-name="Icon"><path d="M13.327 13.15a5.524 5.524 0 00-10.654-.001.688.688 0 00.67.855h9.314a.688.688 0 00.67-.855zm-9.91.124a4.775 4.775 0 019.16-.02zM8.047 8.354a3.18 3.18 0 10-3.18-3.179 3.18 3.18 0 003.18 3.18zm0-5.608a2.43 2.43 0 11-2.43 2.429 2.432 2.432 0 012.43-2.43z"></path></svg><h1 data-qa="createAccount-heading" class="kds-Heading kds-Heading--l kds-Text--bold m-auto my-4 py-1">Create Your Account</h1><span class="kds-Text--m text-default-800">Start saving right away when you create your digital account</span><span class="block h-4 w-1/3 min-w-ll-wide my-8 mx-auto bg-brand-800"></span></header>
       <form>
         <Input
           value={name}

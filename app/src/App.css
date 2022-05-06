@@ -11,7 +11,8 @@
 }
 
 .MainContainer {
-  width: 50%;
+  width: 90%;
+  max-width: 460px;
 }
 
 html {

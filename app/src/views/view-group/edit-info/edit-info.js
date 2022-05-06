@@ -1,13 +1,15 @@
 import { useContext, useState } from "react";
 import { Button } from "../../../components/button/button";
 import { Input } from "../../../components/input/input";
-import { HSpacer } from "../../../components/spacer/spacer";
+import { HSpacer, WSpacer } from "../../../components/spacer/spacer";
 import { Error } from "../../../components/text/error/error";
 import { DialogContext } from "../../../context/dialog/dialog.context";
 import { LoaderContext } from "../../../context/loader/loader.context";
 import { GroupService } from "../../../services/group.service";
 import { Objects } from "../../../utils/object.utils";
 import { Strings } from "../../../utils/string.utils";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import "./edit-info.css";
 
 function EditInfo(props) {
@@ -87,7 +89,7 @@ function EditInfo(props) {
       <Input
         value={group.name}
         onChange={handleGroupNameChange}
-        label="Nome do grupo"
+        label="Shopping List Name"
         id="group-name"
         type="text"
         error={errors.name}
@@ -97,36 +99,19 @@ function EditInfo(props) {
       <Input
         value={group.date}
         onChange={handleDateChange}
-        label="Data do amigo secreto"
+        label="List Date"
         id="date"
         type="date"
         error={errors.date}
         required
       />
       <HSpacer height="16px" />
-      <Input
-        value={minValue}
-        onChange={handleMinValueChange}
-        label="Valor mínimo (Ex.: 5.00)"
-        id="min-value"
-        type="number"
-        error={errors.minValue}
-        required
-      />
-      <HSpacer height="16px" />
-      <Input
-        value={maxValue}
-        onChange={handleMaxValueChange}
-        label="Valor máximo (Ex.: 25.00)"
-        id="max-value"
-        type="number"
-        error={errors.maxValue}
-        required
-      />
-      <HSpacer height="16px" />
-      <Button onClick={handleCancel}>Cancel</Button>
-      <HSpacer height="8px" />
       <Button onClick={handleSave}>Save</Button>
+      <HSpacer height="8px" />
+      <Button onClick={handleCancel}>
+          <FontAwesomeIcon icon={faTimes} className="Icon" />
+          <WSpacer width="5px" />Cancel
+      </Button>
       <Error center>{error}</Error>
       <HSpacer height="16px" />
     </div>

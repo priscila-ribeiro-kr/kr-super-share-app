@@ -6600,6 +6600,10 @@ code {
   width: 100% !important
 }
 
+.w-almost-full {
+  width: 99% !important
+}
+
 .w-screen {
   width: 100vw !important
 }

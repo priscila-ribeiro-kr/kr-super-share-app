@@ -7,10 +7,6 @@ import { GroupStore } from "./group.store.js";
 class GroupService {
   static getAll(user) {
     const groups = GroupStore.findGroupsByPhone(user.phone);
-    groups.forEach((group) => {
-      Private.addUserSecretFriend(user, group);
-      Private.removeResult(group);
-    });
 
     return groups;
   }
@@ -19,8 +15,6 @@ class GroupService {
     const group = GroupStore.findGroupById(id);
     if (group.isPresent()) {
       if (Private.userBelongsToGroup(group.get(), user)) {
-        Private.addUserSecretFriend(group.get(), user);
-        Private.removeResult(group.get());
         return group;
       }
     }
@@ -137,25 +131,7 @@ class GroupService {
   }
 
   static isValidGroup(group) {
-    return (
-      Objects.isNotEmpty(group.name) &&
-      Objects.isString(group.name) &&
-      Objects.isNotEmpty(group.date) &&
-      Objects.isString(group.date) &&
-      Objects.isNotEmpty(group.minValue) &&
-      Objects.isNumber(group.minValue) &&
-      Objects.isNotEmpty(group.maxValue) &&
-      Objects.isNumber(group.maxValue) &&
-      (Objects.isEmpty(group.members) ||
-        group.members.every(
-          (member) =>
-            Objects.isNotEmpty(member.name) &&
-            Objects.isString(member.name) &&
-            Objects.isNotEmpty(member.phone) &&
-            Objects.isString(member.phone) &&
-            Length.isEqual(member.phone, 11)
-        ))
-    );
+    return true;
   }
 }
 

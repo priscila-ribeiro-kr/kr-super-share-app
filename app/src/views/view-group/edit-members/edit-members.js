@@ -3,7 +3,7 @@ import { Bar } from "../../../components/bar/bar";
 import { Button } from "../../../components/button/button";
 import { Input } from "../../../components/input/input";
 import { ListItem } from "../../../components/list/list-item/list-item";
-import { HSpacer } from "../../../components/spacer/spacer";
+import { HSpacer, WSpacer } from "../../../components/spacer/spacer";
 import { Subtitle } from "../../../components/text/subtitle/subtitle";
 import { Text } from "../../../components/text/text";
 import { DialogContext } from "../../../context/dialog/dialog.context";
@@ -12,8 +12,10 @@ import { Objects } from "../../../utils/object.utils";
 import { LoaderContext } from "../../../context/loader/loader.context";
 import { Error } from "../../../components/text/error/error";
 import { AuthService } from "../../../services/auth.service";
-import "./edit-members.css";
 import { Strings } from "../../../utils/string.utils";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import "./edit-members.css";
 
 function EditMembers(props) {
   const { executeWithLoading } = useContext(LoaderContext);
@@ -92,7 +94,7 @@ function EditMembers(props) {
       <Input
         value={memberName}
         onChange={handleMemberNameChange}
-        label="Nome do participante"
+        label="Member name"
         id="member-name"
         type="text"
         error={errors.memberName}
@@ -102,18 +104,18 @@ function EditMembers(props) {
       <Input
         value={memberPhone}
         onChange={handleMemberPhoneChange}
-        label="Telefone do participante"
+        label="Member phone number"
         id="member-phone"
         type="tel"
         error={errors.memberPhone}
         required
       />
       <HSpacer height="16px" />
-      <Button onClick={handleAddMember}>Adicionar participante</Button>
+      <Button onClick={handleAddMember}>Add Member</Button>
       <HSpacer height="16px" />
       <Bar />
       <HSpacer height="4px" />
-      <Subtitle>Lista de participantes</Subtitle>
+      <Subtitle>Member List</Subtitle>
       <div className="MemberList">
         {group.members.map((member, index) => (
           <ListItem key={index} id={member.phone} onClick={handleRemoveMember}>
@@ -126,9 +128,12 @@ function EditMembers(props) {
       </div>
       <Error center>{error}</Error>
       <HSpacer height="16px" />
-      <Button onClick={handleCancel}>Cancel</Button>
-      <HSpacer height="8px" />
       <Button onClick={handleSave}>Save</Button>
+      <HSpacer height="8px" />
+      <Button onClick={handleCancel}>
+          <FontAwesomeIcon icon={faTimes} className="Icon" />
+          <WSpacer width="5px" />Cancel
+      </Button>
       <HSpacer height="16px" />
     </div>
   );

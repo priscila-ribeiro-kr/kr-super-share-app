@@ -19,9 +19,7 @@ Gerencie seu amigo secreto de forma simples e rápida!
 - Execute o comando: `npm start`
 - Acesse o endereço [http://localhost:3000](http://localhost:3000)
 
-## Teste
 
-- Para executar os testes execute: `npm test`
 
 ## Gere uma versão para produção
 

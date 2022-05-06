@@ -23,9 +23,9 @@ class Strings {
   }
 
   static parseNumberToMoneyString(number) {
-    const formatter = new Intl.NumberFormat("pr-Br", {
+    const formatter = new Intl.NumberFormat('en-US', {
       style: "currency",
-      currency: "BRL",
+      currency: "USD",
     });
     return formatter.format(number);
   }

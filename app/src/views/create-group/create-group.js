@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Bar } from "../../components/bar/bar";
@@ -11,12 +12,16 @@ import { Text } from "../../components/text/text";
 import { Title } from "../../components/text/title/title";
 import { Objects } from "../../utils/object.utils";
 import { AppRoutes } from "../../constants/routes.constants";
+import { Products } from "../../constants/products.constants";
 import { GroupService } from "../../services/group.service";
 import { LoaderContext } from "../../context/loader/loader.context";
 import { Error } from "../../components/text/error/error";
 import { Strings } from "../../utils/string.utils";
 import { ListItem } from "../../components/list/list-item/list-item";
 import { AuthService } from "../../services/auth.service";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { v4 as uuidv4 } from 'uuid';
 import "./create-group.css";
 
 function CreateGroup() {
@@ -33,6 +38,7 @@ function CreateGroup() {
   const [members, setMembers] = useState([user]);
   const [errors, setErrors] = useState({});
   const [error, setError] = useState("");
+  const [items, setItems] = useState([]);
 
   function updateErrors() {
     setErrors({ ...errors });
@@ -58,24 +64,8 @@ function CreateGroup() {
       minValue: Strings.parseMoneyToNumber(minValue),
       maxValue: Strings.parseMoneyToNumber(maxValue),
       members: members,
+      items: items,
     };
-  }
-
-  async function handleSort(e) {
-    e.preventDefault();
-    const group = createGroupFromState();
-    const errors = GroupService.isValidGroup(group);
-    if (Objects.isEmpty(errors)) {
-      const error = await executeWithLoading(GroupService.createAndSort(group));
-      if (Objects.isEmpty(error)) {
-        navigate(AppRoutes.MyGroups);
-      } else {
-        setError(error);
-      }
-    } else {
-      setErrors(errors);
-    }
-    cleanMemberFields();
   }
 
   async function handleSave(e) {
@@ -150,17 +140,29 @@ function CreateGroup() {
     setDate(e.target.value);
   }
 
-  function handleMinValueChange(e) {
-    errors.minValue = "";
-    updateErrors();
-    setMinValue(e.target.value);
+  function handleAddProduct(e, product, quantity){
+    e.preventDefault();
+    items.push({
+      id: uuidv4(), 
+      user: user,
+      upc: product.upc,
+      name: product.name,
+      total: product.price * quantity,
+      quantity: quantity,
+    });
+    setItems([...items]);
   }
 
-  function handleMaxValueChange(e) {
-    errors.maxValue = "";
-    updateErrors();
-    setMaxValue(e.target.value);
+  function handleRemoveItem(id) {    
+    setItems([...items.filter(item => item.id !== id)]);
   }
+
+  function handleQuantityChange(e) {
+    setMinValue(e.target.value)
+  }
+
+  const optionsItems = Products.Default;
+  const [inputValue, setInputValue] = React.useState(null);
 
   return (
     <div className="CreateGroup">
@@ -169,13 +171,12 @@ function CreateGroup() {
         <Title>Create List</Title>
       </div>
       <form>
-        
         <Card>
-          <Text>General Info</Text>
+          <Subtitle>General Info</Subtitle>
           <Input
             value={groupName}
             onChange={handleGroupNameChange}
-            label="List Name"
+            label="Shopping List Name"
             id="group-name"
             type="text"
             error={errors.name}
@@ -193,10 +194,9 @@ function CreateGroup() {
           />
         </Card>
         <HSpacer height="4px" />
-        
+
         <Card>
-          <Text>Members</Text>
-          <Subtitle>Members List</Subtitle>
+          <Subtitle>Member List</Subtitle>
           {members.map((member, index) => (
             <ListItem
               key={index}
@@ -212,6 +212,7 @@ function CreateGroup() {
           <HSpacer height="4px" />
           <Bar />
           <HSpacer height="16px" />
+          <Subtitle>Add Member</Subtitle>
           <Input
             value={memberName}
             onChange={handleMemberNameChange}
@@ -224,7 +225,7 @@ function CreateGroup() {
           <Input
             value={memberPhone}
             onChange={handleMemberPhoneChange}
-            label="Member phone"
+            label="Member phone number"
             id="member-phone"
             type="tel"
             error={errors.memberPhone}
@@ -233,20 +234,64 @@ function CreateGroup() {
           <Button onClick={handleAddMember}>Add member</Button>
           <Error center>{errors.members}</Error>
           <HSpacer height="4px" />
-
         </Card>
         {members.some((m) => m.phone === user.phone) && (
           <>
             <HSpacer height="4px" />
-            
+
             <Card>
-              <Text>Items</Text>
+              <Subtitle>Shopping List Items</Subtitle>
+
+                {(items.length === 0) && (<Text>Empty shopping list</Text>)}
+                {items.map((product, index) => (
+                    <ListItem
+                      key={index}
+                      id={product.id}
+                      onClick={handleRemoveItem}
+                    >
+                      <Text>
+                        {product.name} - Qtde: {product.quantity} - Total: {product.total}
+                      </Text>
+                    </ListItem>       
+                ))}
+              <HSpacer height="4px" />
+              < Bar />
+              <HSpacer height="16px" />
+              <Subtitle>Add Item</Subtitle>
+
+              <Autocomplete
+                value={inputValue}
+                onChange={(event, newValue) => {
+                  setInputValue(newValue);
+                }} 
+                id="controllable-states-demo"
+                options={optionsItems}
+                getOptionLabel={option => option.name}
+                sx={{ width: `100%` }}
+                renderInput={(params) => <TextField {...params} label="Items List" />}
+              />
+              <Input
+                value={minValue}
+                onChange={(e) => handleQuantityChange(e)}
+                label="Quantity"
+                id="quantity"
+                type="number"
+                error={errors.name}
+                
+              />
+              <HSpacer height="16px" />
+              <Button onClick={(e) => handleAddProduct(e, inputValue, minValue)} >
+                Add Item
+              </Button>
+            </Card>
+            <HSpacer height="4px" />
+            <Card>
+              <Subtitle>Notes</Subtitle>
               <TextArea
                 id="wishes"
-                label="Wish list"
                 onChange={handleWishesChange}
-                cols="40"
-                rows="10"
+                cols="30"
+                rows="5"
               >
                 {wishes}
               </TextArea>

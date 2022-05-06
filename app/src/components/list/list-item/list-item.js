@@ -16,9 +16,13 @@ function ListItem(props) {
       <FontAwesomeIcon icon={faCaretRight} className="Icon" />
       <WSpacer width="5px" />
       <div className="Item">{props.children}</div>
-      <button onClick={handleRemove} className="Remove">
-      <FontAwesomeIcon icon={faTrash} className="Icon" />
-      </button>
+      
+      {!props.blocked && 
+        <button onClick={handleRemove} className="Remove">
+        <FontAwesomeIcon icon={faTrash} className="Icon" />
+        </button>
+      }
+      
     </div>
   );
 }

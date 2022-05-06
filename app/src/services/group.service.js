@@ -32,9 +32,9 @@ class GroupService {
 
   static async update(group) {
     try {
-      if (Objects.isEmpty(group.members)) {
-        return "Necessário no mínimo três participantes";
-      }
+      // if (Objects.isEmpty(group.members)) {
+      //   return "Necessário no mínimo três participantes";
+      // }
       await axios.put(API.Group.Update, group);
     } catch (_) {
       return "Desculpe, um erro inesperado ocorreu. Por favor, tente novamente.";
@@ -80,14 +80,14 @@ class GroupService {
   static isValidMember(member, members) {
     const errors = {};
     if (members.some((m) => Objects.isEqual(m.phone, member.phone))) {
-      errors.memberPhone = "Telefone já adicionado";
+      errors.memberPhone = "Phone number already exists";
       return errors;
     }
     if (Objects.isEmpty(member.name)) {
-      errors.memberName = "Membro deve possuir nome";
+      errors.memberName = "Member name is required";
     }
     if (Objects.isEmpty(member.phone) || Length.isNotEqual(member.phone, 11)) {
-      errors.memberPhone = "Telefone deve possuir 11 dígitos";
+      errors.memberPhone = "Phone number must have 11 characteres";
     }
     return errors;
   }
@@ -95,15 +95,15 @@ class GroupService {
   static isValidGroup(group) {
     const errors = {};
 
-    if (Objects.isEmpty(group.members)) {
-      errors.members = "Necessário no mínimo três participantes";
-    }
+    // if (Objects.isEmpty(group.members)) {
+    //   errors.members = "Necessário no mínimo três participantes";
+    // }
 
     if (Objects.isEmpty(group.name)) {
-      errors.name = "Necessário definir um nome para o grupo";
+      errors.name = "List name is required";
     }
     if (Objects.isEmpty(group.date)) {
-      errors.date = "Necessário definir uma data";
+      errors.date = "List date is required";
     }
     return errors;
   }

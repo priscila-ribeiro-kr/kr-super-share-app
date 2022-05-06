@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useEffect, useState, useContext } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "../../components/button/button";
@@ -19,6 +20,18 @@ import { EditInfo } from "./edit-info/edit-info";
 import { LoaderContext } from "../../context/loader/loader.context";
 import { AuthService } from "../../services/auth.service";
 import { TextArea } from "../../components/text-area/text-area";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { WSpacer } from "../../components/spacer/spacer";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { v4 as uuidv4 } from 'uuid';
+import { Products } from "../../constants/products.constants";
+import { ListItem } from "../../components/list/list-item/list-item";
+import { Bar } from "../../components/bar/bar";
+import { Input } from "../../components/input/input";
+
+
 import "./view-group.css";
 
 function ViewGroup() {
@@ -33,13 +46,15 @@ function ViewGroup() {
   const [wishesError, setWishesError] = useState("");
   const [errors, setErrors] = useState("");
   const [refreshGroup, setRefreshGroup] = useState(0);
-  const [shouldShowSecretFriend, setShouldShowSecretFriend] = useState(false);
+  const [items, setItems] = useState([]);
+  const [minValue, setMinValue] = useState("0");
 
   useEffect(() => {
     let updateGroup = (group) => {
       const userPhone = AuthService.getUserPhone();
       setIsOwner(userPhone === group.owner);
       setGroup(group);
+      setItems(group.items)
 
       const userMember = group.members.find((m) => m.phone === userPhone);
       if (Objects.isNotEmpty(userMember)) {
@@ -130,13 +145,29 @@ function ViewGroup() {
     display(<EditInfo group={group} />);
   }
 
-  function handleShowSecretFriend() {
-    setShouldShowSecretFriend(true);
+  function handleAddProduct(e, product, quantity){
+    e.preventDefault();
+    items.push({
+      id: uuidv4(), 
+      user: user,
+      upc: product.upc,
+      name: product.name,
+      total: product.price * quantity,
+      quantity: quantity,
+    });
+    setItems([...items]);
   }
 
-  function handleHideSecretFriend() {
-    setShouldShowSecretFriend(false);
+  function handleRemoveItem(id) {    
+    setItems([...items.filter(item => item.id !== id)]);
   }
+
+  function handleQuantityChange(e) {
+    setMinValue(e.target.value)
+  }
+
+  const optionsItems = Products.Default;
+  const [inputValue, setInputValue] = React.useState(null);
 
   return (
     <div className="ViewGroup">
@@ -145,111 +176,125 @@ function ViewGroup() {
         <>
           <Title>{group.name}</Title>
           <Card>
-            <Text>{group.members.length} participantes</Text>
-            <Text>
+            
+            {/* <Text>
               O amigo secreto será feito no dia {Dates.formatDate(group.date)}
-            </Text>
+            </Text> */}
             <HSpacer height="8px" />
-            <Text>
+            {/* <Text>
               Valor mínimo: {Strings.parseNumberToMoneyString(group.minValue)}
-            </Text>
+            </Text> */}
             <Text>
-              Valor máximo: {Strings.parseNumberToMoneyString(group.maxValue)}
+            Estimated Total: {Strings.parseNumberToMoneyString(group.maxValue)}
             </Text>
             {!group.secretFriend && isOwner && (
               <>
                 <HSpacer height="4px" />
-                <Button onClick={handleEditInfo}>Editar informações</Button>
+                <Button onClick={handleEditInfo}>Edit List Info</Button>
               </>
             )}
             <HSpacer height="8px" />
           </Card>
           <HSpacer height="16px" />
-          {group.secretFriend ? (
-            <Card>
-              {shouldShowSecretFriend ? (
-                <>
-                  <Subtitle>
-                    Seu amigo secreto é: {group.secretFriend.name}
-                  </Subtitle>
-                  <Text>Telefone: {group.secretFriend.phone}</Text>
-                  <HSpacer height="8px" />
-                  {group.secretFriend.wishes && (
-                    <>
-                      <TextArea
-                        id="wishes"
-                        label="Lista de desejos"
-                        disabled
-                        cols="40"
-                        rows="10"
-                      >
-                        {group.secretFriend.wishes}
-                      </TextArea>
-                      <HSpacer height="16px" />
-                    </>
-                  )}
-                  <Button onClick={handleHideSecretFriend}>
-                    Esconder amigo secreto
-                  </Button>
-                </>
-              ) : (
-                <Button onClick={handleShowSecretFriend}>
-                  Ver meu amigo secreto
-                </Button>
-              )}
-            </Card>
-          ) : (
-            <>
-              {isOwner && (
-                <>
-                  <Button onClick={handleSort}>Sortear amigo secreto</Button>
-                  <Error center>{errors.sort}</Error>
-                </>
-              )}
-            </>
-          )}
-          <HSpacer height="16px" />
           <Card>
-            <Subtitle>Lista de participantes</Subtitle>
+            <Subtitle>Members List ({group.members.length})</Subtitle>
             {group.members.map((member, index) => (
               <Text key={index}>
-                {member.name} ({member.phone})
+                - {member.name} ({member.phone})
               </Text>
             ))}
             {!group.secretFriend && isOwner && (
               <>
                 <HSpacer height="16px" />
-                <Button onClick={handleAddMember}>Alterar participantes</Button>
+                <Button onClick={handleAddMember}>Add members</Button>
               </>
             )}
           </Card>
-          {group.members.some((m) => m.phone === user.phone) && (
+ 
+          <HSpacer height="16px" />
+          {items && (
+          <Card>
+            <Subtitle>Shopping List Items</Subtitle>
+
+              {(items.length === 0) && (<Text>Empty shopping list</Text>)}
+              {items.map((product, index) => (
+                  <ListItem
+                    key={index}
+                    id={product.id}
+                    onClick={handleRemoveItem}
+                  >
+                    <Text>
+                      {product.name} - Qtde: {product.quantity} - Total: {product.total}
+                    </Text>
+                  </ListItem>       
+              ))}
+            <HSpacer height="4px" />
+            < Bar />
+            <HSpacer height="16px" />
+            <Subtitle>Add Item</Subtitle>
+
+            <Autocomplete
+              value={inputValue}
+              onChange={(event, newValue) => {
+                setInputValue(newValue);
+              }} 
+              id="controllable-states-demo"
+              options={optionsItems}
+              getOptionLabel={option => option.name}
+              sx={{ width: `100%` }}
+              renderInput={(params) => <TextField {...params} label="Items List" />}
+            />
+            <Input
+              value={minValue}
+              onChange={(e) => handleQuantityChange(e)}
+              label="Quantity"
+              id="quantity"
+              type="number"
+              error={errors.name}
+              
+            />
+            <HSpacer height="16px" />
+            <Button onClick={(e) => handleAddProduct(e, inputValue, minValue)} >
+              Add Item
+            </Button>
+          </Card>
+)}
+          <HSpacer height="16px" />
+            {group.members.some((m) => m.phone === user.phone) && (
             <>
-              <HSpacer height="16px" />
               <Card>
+                <Subtitle>Notes</Subtitle>
                 <TextArea
                   id="wishes"
-                  label="Sua lista de desejos"
                   onChange={handleWishesChange}
-                  cols="40"
-                  rows="10"
+                  cols="30"
+                  rows="5"
                 >
                   {wishes}
                 </TextArea>
+              
+              
                 <HSpacer height="16px" />
-                <Button onClick={handleSaveWishes}>Salvar desejos</Button>
+                <Button onClick={handleSaveWishes}>Save Notes</Button>
                 <Error center>{wishesError}</Error>
               </Card>
             </>
           )}
+
           <HSpacer height="16px" />
-          <Button onClick={handleBack}>Voltar</Button>
-          <HSpacer height="16px" />
-          <HSpacer height="8px" />
           {isOwner && (
-            <Button onClick={handleRemoveGroup}>Excluir grupo</Button>
+            <Button onClick={handleRemoveGroup}>      
+              <FontAwesomeIcon icon={faTrash} className="Icon" />
+              <WSpacer width="5px" />
+              Delete List
+            </Button>
           )}
           <Error center>{errors.delete}</Error>
+          <HSpacer height="16px" />
+          <Button onClick={handleBack} className="kds-Button kds-Button--cancel w-full sm:w-1/5">
+            <FontAwesomeIcon icon={faArrowLeft} className="Icon" />
+            <WSpacer width="5px" />Back
+          </Button>
           <HSpacer height="16px" />
         </>
       )}

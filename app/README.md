@@ -1,29 +1,27 @@
-# Sorteio Amigo Secreto
+# SUPER SHARE - Collaborative Shopping List
 
-Gerencie seu amigo secreto de forma simples e rápida!
+SuperShare is a collaborative shopping list between Kroger's customers that allows users to share theirs shopping list and, in the end, split the cost with people involved all in one place.
 
-## Instalação
+## Installation
 
-- Instale o [NodeJS](https://nodejs.org/en/)
-- Instale os pacotes do projeto com o comando: `npm install`
-- Agora é só desenvolver!
+- Install [NodeJS](https://nodejs.org/en/)
+- Install packages running this command: `npm install`
+- Now it is abble to code!
 
-## Adicione novos pacotes
+## Add new packages
 
-- Utilize o comando: `npm i {nome do pacote}`
-- Utilize a [registry](https://www.npmjs.com/) oficial para encontrar novos pacotes.
+- Rum command: `npm i {package name}`
+- Use [registry](https://www.npmjs.com/) the official channel to find new packages.
 
-## Execute o projeto localmente
+## Executing project locally 
 
-- Execute os passos da [instalação](#Instalação)
-- Execute o comando: `npm start`
-- Acesse o endereço [http://localhost:3000](http://localhost:3000)
+- Follow [installation](#Installation) steps 
+- Run command: `npm start`
+- Access URL [http://localhost:3001](http://localhost:3001)
 
+## Generate a production version
 
-
-## Gere uma versão para produção
-
-- Execute: `npm run build`
+- Run command: `npm run build`
 - Open host directory: `cd host`
-- Instale as dependências: `npm install`
-- Hospede a aplicação com Express utilizando: `node host.js`
+- Install the dependencies: `npm install`
+- Host app with Express by using: `node host.js`

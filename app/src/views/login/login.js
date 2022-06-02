@@ -50,7 +50,7 @@ function Login() {
         <Input
           value={phone}
           onChange={handlePhoneChange}
-          label="Phone"
+          label="Phone Number"
           id="username"
           type="text"
         />

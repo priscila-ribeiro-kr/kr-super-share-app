@@ -23,6 +23,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { v4 as uuidv4 } from 'uuid';
 import "./create-group.css";
+import { UserInfo } from "../../components/user-info/user-info";
 
 function CreateGroup() {
   const navigate = useNavigate();
@@ -166,6 +167,7 @@ function CreateGroup() {
 
   return (
     <div className="CreateGroup">
+      <UserInfo>{user.name}</UserInfo>
       <HSpacer height="16px" />
       <div className="CreateGroup_Title">
         <Title>Create List</Title>

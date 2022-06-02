@@ -11,6 +11,8 @@ import { AppRoutes } from "../../constants/routes.constants";
 import { LoaderContext } from "../../context/loader/loader.context";
 import { GroupService } from "../../services/group.service";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { UserInfo } from "../../components/user-info/user-info";
+import { AuthService } from "../../services/auth.service";
 
 import "./my-groups.css";
 
@@ -18,6 +20,7 @@ function MyGroups() {
   const navigate = useNavigate();
   const { executeWithLoading } = useContext(LoaderContext);
   const [groups, setGroups] = useState(null);
+  const [user] = useState(AuthService.getUser());
 
   useEffect(() => {
     let updateGroups = (groups) => {
@@ -48,6 +51,7 @@ function MyGroups() {
 
   return (
     <div className="MyGroups">
+      <UserInfo>{user.name}</UserInfo>
       <HSpacer height="16px" />
       <Title>Your Shopping Lists</Title>
       {groups &&

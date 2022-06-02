@@ -30,6 +30,7 @@ import { Products } from "../../constants/products.constants";
 import { ListItem } from "../../components/list/list-item/list-item";
 import { Bar } from "../../components/bar/bar";
 import { Input } from "../../components/input/input";
+import { UserInfo } from "../../components/user-info/user-info";
 
 
 import "./view-group.css";
@@ -174,6 +175,9 @@ function ViewGroup() {
       <Error>{errors.fatal}</Error>
       {group && (
         <>
+        
+          <UserInfo>{user.name}</UserInfo>
+      
           <Title>{group.name}</Title>
           <Card>
             
